@@ -12,6 +12,10 @@ if(!require(devtools)) install.packages("devtools")
 if(!require(spatialsampler)) install_github("ernestguevarra/spatialsampler")
 if(!require(gadmr)) install_github("SpatialWorks/gadmr")
 
+if(!require(stringr)) install.packages("stringr")
+
+options(stringsAsFactors = FALSE)
+
 ################################################################################
 #
 # Read Mali maps from OCHA/Humanitarian data
@@ -84,6 +88,13 @@ writeOGR(obj = bamako,
          dsn = "data-raw/maps/bamako.gpkg",
          layer = "bamako",
          driver = "GPKG")
+
+x <- str_replace(bamako@data$admin4Name, pattern = "é", "e")
+x <- str_replace(x, pattern = "é", "e")
+x <- str_replace(x, pattern = "è", "e")
+x <- str_replace(x, pattern = "è", "e")
+
+bamako@data$admin4Name <- x
 
 ## Save Bamako borders data as data in package
 use_data(bamako, overwrite = TRUE)
