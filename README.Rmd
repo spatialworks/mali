@@ -11,6 +11,10 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+
+require(rgdal)
+require(rgeos)
+require(raster)
 ```
 # mali: Datasets for Use in Designing Surveys in Mali <img src="man/figures/mali.png" width="200" align="right" />
 
@@ -34,10 +38,92 @@ install_github("validmeasures/mali")
 
 ## Usage
 
-### Country borders
+### Accessing Mali map data
 
-To access country borders, use the following commands:
+The following packages will be required when accessing and manipulating map data available from the `mali` package.
+
+```{r pacakges, echo = TRUE, eval = FALSE}
+require(rgdal)
+require(rgeos)
+require(raster)
+```
+
+#### Country borders
+
+To access country borders, use the following command:
 
 ```{r country, echo = TRUE, eval = TRUE}
 mali::mli0
+```
+
+The output provides overview information on the features included in the country borders map and the variables included in the country map data. This is a summary output for a `SpatialPolygonsDataFrame`.
+
+To plot the country borders, the `plot()` function from the `sp` package can be used as follows:
+
+```{r country-plot, echo = TRUE, eval = TRUE}
+plot(mali::mli0)
+```
+
+#### Region borders
+
+To access region borders, use the following command:
+
+```{r region, echo = TRUE, eval = TRUE}
+mali::mli1
+```
+
+The output provides overview information on the features included in the region borders map and the variables included in the region map data. This is a summary output for a `SpatialPolygonsDataFrame`.
+
+To plot the region borders, the `plot()` function from the `sp` package can be used as follows:
+
+```{r region-plot, echo = TRUE, eval = TRUE}
+plot(mali::mli1)
+```
+
+#### Cercle borders
+
+To access cercle borders, use the following command:
+
+```{r cercle, echo = TRUE, eval = TRUE}
+mali::mli2
+```
+
+The output provides overview information on the features included in the cercle borders map and the variables included in the cercle map data. This is a summary output for a `SpatialPolygonsDataFrame`.
+
+To plot the cercle borders, the `plot()` function from the `sp` package can be used as follows:
+
+```{r cercle-plot, echo = TRUE, eval = TRUE}
+plot(mali::mli2)
+```
+
+#### Commune borders
+
+To access commune borders, use the following command:
+
+```{r commune, echo = TRUE, eval = TRUE}
+mali::mli3
+```
+
+The output provides overview information on the features included in the commune borders map and the variables included in the commune map data. This is a summary output for a `SpatialPolygonsDataFrame`.
+
+To plot the commune borders, the `plot()` function from the `sp` package can be used as follows:
+
+```{r commune-plot, echo = TRUE, eval = TRUE}
+plot(mali::mli3)
+```
+
+#### Bamako borders
+
+To access Bamako borders, use the following command:
+
+```{r bamako, echo = TRUE, eval = TRUE}
+mali::bamako
+```
+
+The output provides overview information on the features included in the bamako borders map and the variables included in the bamako map data. This is a summary output for a `SpatialPolygonsDataFrame`.
+
+To plot the bamako borders, the `plot()` function from the `sp` package can be used as follows:
+
+```{r bamako-plot, echo = TRUE, eval = TRUE}
+plot(mali::bamako)
 ```
