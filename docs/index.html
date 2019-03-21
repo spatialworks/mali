@@ -91,6 +91,107 @@
 <pre class="sourceCode r" id="cb1"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="cf">if</span>(<span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">require</a></span>(devtools)) <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"devtools"</span>) </a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"validmeasures/mali"</span>)</a></code></pre>
 </div>
+<div id="usage" class="section level2">
+<h2 class="hasAnchor">
+<a href="#usage" class="anchor"></a>Usage</h2>
+<div id="accessing-mali-map-data" class="section level3">
+<h3 class="hasAnchor">
+<a href="#accessing-mali-map-data" class="anchor"></a>Accessing Mali map data</h3>
+<p>The following packages will be required when accessing and manipulating map data available from the <code>mali</code> package.</p>
+<pre class="sourceCode r" id="cb2"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">require</a></span>(rgdal)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">require</a></span>(rgeos)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">require</a></span>(raster)</a></code></pre>
+<div id="country-borders" class="section level4">
+<h4 class="hasAnchor">
+<a href="#country-borders" class="anchor"></a>Country borders</h4>
+<p>To access country borders, use the following command:</p>
+<pre class="sourceCode r" id="cb3"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">mali<span class="op">::</span>mli0</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; class       : SpatialPolygonsDataFrame </span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; features    : 1 </span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; extent      : -12.23924, 4.24467, 10.14137, 24.99951  (xmin, xmax, ymin, ymax)</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; coord. ref. : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 </span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; variables   : 11</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; names       : OBJECTID_1, admin0Name, admin0Pcod, admin0RefN, admin0AltN, admin0Al_1,       date,    validOn, validTo, Shape_Leng, Shape_Area </span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; value       :          1,       Mali,         ML,       Mali,         NA,         NA, 2012/12/31, 2015/04/08,      NA,   71.76874,   106.8238</span></a></code></pre>
+<p>The output provides overview information on the features included in the country borders map and the variables included in the country map data. This is a summary output for a <code>SpatialPolygonsDataFrame</code>.</p>
+<p>To plot the country borders, the <code><a href="https://www.rdocumentation.org/packages/raster/topics/plot">plot()</a></code> function from the <code>sp</code> package can be used as follows:</p>
+<pre class="sourceCode r" id="cb4"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>(mali<span class="op">::</span>mli0)</a></code></pre>
+<p><img src="reference/figures/README-country-plot-1.png" width="100%"></p>
+</div>
+<div id="region-borders" class="section level4">
+<h4 class="hasAnchor">
+<a href="#region-borders" class="anchor"></a>Region borders</h4>
+<p>To access region borders, use the following command:</p>
+<pre class="sourceCode r" id="cb5"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">mali<span class="op">::</span>mli1</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; class       : SpatialPolygonsDataFrame </span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; features    : 9 </span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; extent      : -12.23924, 4.24467, 10.14137, 24.99951  (xmin, xmax, ymin, ymax)</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; coord. ref. : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 </span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; variables   : 13</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; names       : OBJECTID, admin0Name, admin0Pcod, admin1Name, admin1Pcod, admin1RefN, admin1AltN, admin1Al_1,       date,    validOn, validTo, Shape_Leng,  Shape_Area </span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; min values  :        1,       Mali,         ML,     Bamako,       ML01,     Bamako,         NA,         NA, 2015/04/08, 2015/04/08,      NA,  0.7517338,  0.02043903 </span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; max values  :        9,       Mali,         ML, Tombouctou,       ML09, Tombouctou,         NA,         NA, 2015/04/08, 2015/04/08,      NA, 33.7798722, 43.15657700</span></a></code></pre>
+<p>The output provides overview information on the features included in the region borders map and the variables included in the region map data. This is a summary output for a <code>SpatialPolygonsDataFrame</code>.</p>
+<p>To plot the region borders, the <code><a href="https://www.rdocumentation.org/packages/raster/topics/plot">plot()</a></code> function from the <code>sp</code> package can be used as follows:</p>
+<pre class="sourceCode r" id="cb6"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>(mali<span class="op">::</span>mli1)</a></code></pre>
+<p><img src="reference/figures/README-region-plot-1.png" width="100%"></p>
+</div>
+<div id="cercle-borders" class="section level4">
+<h4 class="hasAnchor">
+<a href="#cercle-borders" class="anchor"></a>Cercle borders</h4>
+<p>To access cercle borders, use the following command:</p>
+<pre class="sourceCode r" id="cb7"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">mali<span class="op">::</span>mli2</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; class       : SpatialPolygonsDataFrame </span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt; features    : 50 </span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt; extent      : -12.23924, 4.24467, 10.14137, 24.99951  (xmin, xmax, ymin, ymax)</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt; coord. ref. : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 </span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; variables   : 15</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; names       : OBJECTID, admin0Name, admin0Pcod, admin1Name, admin1Pcod, admin2Name, admin2Pcod, admin2RefN, admin2AltN, admin2Al_1,       date,    validOn, validTo, Shape_Leng,  Shape_Area </span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; min values  :        1,       Mali,         ML,     Bamako,       ML01,   Abeibara,     ML0101,   Abeibara,         NA,         NA, 2015/04/08, 2015/04/08,      NA,  0.7517338,  0.02043903 </span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; max values  :        9,       Mali,         ML, Tombouctou,       ML09,   Youwarou,     ML0901,   Youwarou,         NA,         NA, 2015/04/08, 2015/04/08,      NA, 26.0765915, 28.80383259</span></a></code></pre>
+<p>The output provides overview information on the features included in the cercle borders map and the variables included in the cercle map data. This is a summary output for a <code>SpatialPolygonsDataFrame</code>.</p>
+<p>To plot the cercle borders, the <code><a href="https://www.rdocumentation.org/packages/raster/topics/plot">plot()</a></code> function from the <code>sp</code> package can be used as follows:</p>
+<pre class="sourceCode r" id="cb8"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>(mali<span class="op">::</span>mli2)</a></code></pre>
+<p><img src="reference/figures/README-cercle-plot-1.png" width="100%"></p>
+</div>
+<div id="commune-borders" class="section level4">
+<h4 class="hasAnchor">
+<a href="#commune-borders" class="anchor"></a>Commune borders</h4>
+<p>To access commune borders, use the following command:</p>
+<pre class="sourceCode r" id="cb9"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">mali<span class="op">::</span>mli3</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; class       : SpatialPolygonsDataFrame </span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; features    : 701 </span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; extent      : -12.23924, 4.24467, 10.14137, 24.99951  (xmin, xmax, ymin, ymax)</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; coord. ref. : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 </span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; variables   : 17</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; names       : OBJECTID_1, admin0Name, admin0Pcod, admin1Name, admin1Pcod, admin2Name, admin2Pcod, admin3Name, admin3Pcod, admin3RefN, admin3AltN, admin3Al_1,       date,    validOn, validTo, ... </span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; min values  :          1,       Mali,         ML,     Bamako,       ML01,   Abeibara,     ML0101,   Abeibara,   ML010101,   Abeibara,         NA,         NA, 2013/05/31, 2015/04/08,      NA, ... </span></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt; max values  :         99,       Mali,         ML, Tombouctou,       ML09,   Youwarou,     ML0901,     Zegoua,   ML090106,     Zegoua,         NA,         NA, 2013/05/31, 2015/04/08,      NA, ...</span></a></code></pre>
+<p>The output provides overview information on the features included in the commune borders map and the variables included in the commune map data. This is a summary output for a <code>SpatialPolygonsDataFrame</code>.</p>
+<p>To plot the commune borders, the <code><a href="https://www.rdocumentation.org/packages/raster/topics/plot">plot()</a></code> function from the <code>sp</code> package can be used as follows:</p>
+<pre class="sourceCode r" id="cb10"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>(mali<span class="op">::</span>mli3)</a></code></pre>
+<p><img src="reference/figures/README-commune-plot-1.png" width="100%"></p>
+</div>
+<div id="bamako-borders" class="section level4">
+<h4 class="hasAnchor">
+<a href="#bamako-borders" class="anchor"></a>Bamako borders</h4>
+<p>To access Bamako borders, use the following command:</p>
+<pre class="sourceCode r" id="cb11"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">mali<span class="op">::</span>bamako</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co">#&gt; class       : SpatialPolygonsDataFrame </span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt; features    : 71 </span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">#&gt; extent      : -8.081477, -7.91215, 12.50289, 12.71143  (xmin, xmax, ymin, ymax)</span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt; coord. ref. : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 </span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="co">#&gt; variables   : 19</span></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="co">#&gt; names       : OBJECTID, admin0Name, admin0Pcod, admin1Name, admin1Pcod, admin2Name, admin2Pcod, admin3Name, admin3Pcod,        admin4Name,  admin4Pcod,        admin4RefN,      admin4AltN, admin4Al_1,       date, ... </span></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="co">#&gt; min values  :        1,       Mali,         ML,     Bamako,       ML09,     Bamako,     ML0901,  Commune I,   ML090101,   Babouillabougou, ML090101001,   Babouillabougou, Babouillabougou,         NA, 2013/05/31, ... </span></a>
+<a class="sourceLine" id="cb11-9" data-line-number="9"><span class="co">#&gt; max values  :        9,       Mali,         ML,     Bamako,       ML09,     Bamako,     ML0901, Commune VI,   ML090106, Zone Industrielle, ML090106903, Zone Industrielle, Zone industriel,         NA, 2013/05/31, ...</span></a></code></pre>
+<p>The output provides overview information on the features included in the bamako borders map and the variables included in the bamako map data. This is a summary output for a <code>SpatialPolygonsDataFrame</code>.</p>
+<p>To plot the bamako borders, the <code><a href="https://www.rdocumentation.org/packages/raster/topics/plot">plot()</a></code> function from the <code>sp</code> package can be used as follows:</p>
+<pre class="sourceCode r" id="cb12"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/raster/topics/plot">plot</a></span>(mali<span class="op">::</span>bamako)</a></code></pre>
+<p><img src="reference/figures/README-bamako-plot-1.png" width="100%"></p>
+</div>
+</div>
+</div>
 </div>
   </div>
 
