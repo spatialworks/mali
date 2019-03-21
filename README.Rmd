@@ -31,3 +31,13 @@ You can install the development version of `mali` from [GitHub](https://github.c
 if(!require(devtools)) install.packages("devtools") 
 install_github("validmeasures/mali")
 ```
+
+## Usage
+
+### Country borders
+
+To access country borders, use the following commands:
+
+```{r country, echo = TRUE, eval = TRUE}
+mali::mli0
+```
