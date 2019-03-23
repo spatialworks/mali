@@ -171,3 +171,37 @@ NULL
 #
 ################################################################################
 "bamako"
+
+
+################################################################################
+#
+#' settlements
+#'
+#' Settlements/villages of Mali
+#'
+#' @format A data.frame with 20 columns and 18769 rows:
+#' \describe{
+#' \item{\code{featureNam}}{Name of settlement/village}
+#' \item{\code{pcode}}{Settlement/village postal code}
+#' \item{\code{featureRef}}{Reference name of settlement/village}
+#' \item{\code{featureAlt}}{Alternative name of settlement/village}
+#' \item{\code{popPlaceCl}}{Classification of settlement}
+#' \item{\code{admin0Name}}{Country (administrative level 0) name}
+#' \item{\code{admin0Pcod}}{Country (administrative level 1) code}
+#' \item{\code{admin1Name}}{Name of administrative level 1 (region)}
+#' \item{\code{admin1Pcod}}{Postal code of administrative level 1 (region)}
+#' \item{\code{admin2Name}}{Name of administrative level 2 (cercle)}
+#' \item{\code{admin2Pcod}}{Postal code of administrative level 2 (cercle)}
+#' \item{\code{admin3Name}}{Name of administrative level 3 (commune)}
+#' \item{\code{admin3Pcod}}{Postal code of administrative level 3 (commune)}
+#' \item{\code{date}}{Date map was poduced}
+#' \item{\code{validOn}}{Date map was last validated}
+#' \item{\code{validTo}}{Date map is valid up to}
+#' \item{\code{longitude}}{Longitude coordinate of settlement/village}
+#' \item{\code{Latitude}}{Latitude coordinate of settlement/village}
+#' }
+#'
+#' @source Humanitarian Data Exchange <https://data.humdata.org/dataset/administrative-boundaries-cod-mli>
+#
+################################################################################
+"settlements"
