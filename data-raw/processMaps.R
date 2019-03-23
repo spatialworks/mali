@@ -9,7 +9,7 @@ if(!require(rgdal)) install.packages("rgdal")
 if(!require(rgeos)) install.packages("rgeos")
 
 if(!require(devtools)) install.packages("devtools")
-if(!require(spatialsampler)) install_github("ernestguevarra/spatialsampler")
+if(!require(spatialsampler)) install_github("SpatialWorks/spatialsampler")
 if(!require(gadmr)) install_github("SpatialWorks/gadmr")
 
 if(!require(stringr)) install.packages("stringr")
@@ -98,3 +98,23 @@ bamako@data$admin4Name <- x
 
 ## Save Bamako borders data as data in package
 use_data(bamako, overwrite = TRUE)
+
+## Settlements
+settlements <- readOGR(dsn = "data-raw/maps/MLI_PopulatedPlaces_SHP",
+                       layer = "COD_MLI_PopulatedPlaces_Rena",
+                       verbose = FALSE)
+
+writeOGR(obj = settlements,
+         dsn = "data-raw/maps/mali.gpkg",
+         layer = "settlements",
+         driver = "GPKG")
+
+settlementsCoords <- data.frame(settlements@coords)
+names(settlementsCoords) <- c("longitude", "latitude")
+
+settlements <- data.frame(settlements@data, settlementsCoords)
+write.csv(settlements, "data-raw/maps/settlements.csv", row.names = FALSE)
+
+settlements$featureNam <- str_replace(settlements$featureNam, pattern = "é", replacement = "e")
+
+use_data(settlements, overwrite = TRUE)
